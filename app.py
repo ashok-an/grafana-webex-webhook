@@ -3,7 +3,7 @@ import os
 from flask import Flask, request, jsonify
 from webexteamssdk import WebexTeamsAPI
 
-roomId - os.getenv('WEBEX_ROOM_ID', '<no room id>')
+roomId = os.getenv('WEBEX_ROOM_ID', '<no room id>')
 token = os.getenv('WEBEX_TOKEN', '<no webex token>')
 
 api = WebexTeamsAPI(access_token=token)
@@ -13,7 +13,11 @@ def send_message_to_room(room_id, message):
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST', 'GET'])
+@app.route('/healthz', methods=['GET'])
+def healthz():
+    return {'message': 'ok'}
+
+@app.route('/webhook', methods=['POST'])
 def webhook():
     payload = request.get_json()
     alert0 = payload.get('alerts', [])[0]
