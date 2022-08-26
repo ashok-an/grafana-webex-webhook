@@ -24,9 +24,9 @@ def webhook():
     summary = alert0.get('annotations', {}).get('summary', '<no summary>')
     panelUrl = alert0.get('panelUrl', '')
     labels = str(alert0.get('labels', {}))
-    startsAt = alert0.get('startsAt', '<no time>')
+    startsAt = alert0.get('startsAt', '<no time>').split('.')[0]
     valueString = alert0.get('valueString', '<no value>')
-    title = f"####🚩 {payload.get('title', '<no title>')}"
+    title = f"#### 🚩 {payload.get('title', '<no title>')}"
 
     #print(json.dumps(data, sort_keys=True, indent=2))
     #return jsonify(payload)
